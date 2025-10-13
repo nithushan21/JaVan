@@ -1,0 +1,18 @@
+.seat-map {
+  display: grid;
+  grid-template-columns: repeat(2, 60px);
+  gap: 10px;
+  margin: 20px auto;
+}
+
+.seat {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.available { background-color: green; color: white; }
+.booked { background-color: red; color: white; cursor: not-allowed; }
+.selected { background-color: blue; color: white; }

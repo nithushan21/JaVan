@@ -1,28 +1,27 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { supabase } from '../lib/supabaseClient'
+import Navbar from '../components/Navbar'
+import TripCard from '../components/TripCard'
 
 export default function Home() {
-  const router = useRouter()
-  const [route, setRoute] = useState('Colombo → Jaffna')
-  const [date, setDate] = useState('')
+  const [trips, setTrips] = useState([])
 
-  const handleSearch = () => {
-    router.push(`/trips?route=${route}&date=${date}`)
-  }
+  useEffect(() => {
+    async function fetchTrips() {
+      const { data, error } = await supabase.from('trips').select('*').order('travel_date')
+      if (error) console.log(error)
+      else setTrips(data)
+    }
+    fetchTrips()
+  }, [])
 
   return (
-    <div className="container">
-      <h1>Van Booking System</h1>
-      <label>Route:</label>
-      <select value={route} onChange={(e) => setRoute(e.target.value)}>
-        <option>Colombo → Jaffna</option>
-        <option>Jaffna → Colombo</option>
-      </select>
-
-      <label>Date:</label>
-      <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-
-      <button onClick={handleSearch}>Search Trips</button>
+    <div>
+      <Navbar />
+      <h1 style={{ textAlign: 'center', marginTop: '20px' }}>Available Trips</h1>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {trips.map(trip => <TripCard key={trip.id} trip={trip} />)}
+      </div>
     </div>
   )
 }
