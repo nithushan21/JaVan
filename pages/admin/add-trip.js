@@ -28,12 +28,24 @@ export default function AddTrip() {
       <Navbar />
       <h1 style={{ textAlign: 'center', marginTop: '20px' }}>Add New Trip</h1>
       <div style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px', margin: '20px auto' }}>
-        <input placeholder="Route" value={route} onChange={e => setRoute(e.target.value)} style={{ margin: '5px', padding: '8px' }}/>
-        <input type="date" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ margin: '5px', padding: '8px' }}/>
-        <input type="time" value={time} onChange={e => setTime(e.target.value)} style={{ margin: '5px', padding: '8px' }}/>
-        <input type="number" value={seats} onChange={e => setSeats(e.target.value)} style={{ margin: '5px', padding: '8px' }}/>
-        <input type="number" placeholder="Fare per seat" value={fare} onChange={e => setFare(e.target.value)} style={{ margin: '5px', padding: '8px' }}/>
-        <input placeholder="Driver phone" value={driverPhone} onChange={e => setDriverPhone(e.target.value)} style={{ margin: '5px', padding: '8px' }}/>
+        <label className="sr-only" htmlFor="route">Route</label>
+        <input id="route" placeholder="Route" value={route} onChange={e => setRoute(e.target.value)} style={{ margin: '5px', padding: '8px' }} aria-required="true" />
+
+        <label className="sr-only" htmlFor="travelDate">Travel date</label>
+        <input id="travelDate" type="date" value={travelDate} onChange={e => setTravelDate(e.target.value)} style={{ margin: '5px', padding: '8px' }} aria-required="true" />
+
+        <label className="sr-only" htmlFor="time">Departure time</label>
+        <input id="time" type="time" value={time} onChange={e => setTime(e.target.value)} style={{ margin: '5px', padding: '8px' }} aria-required="true" />
+
+        <label className="sr-only" htmlFor="seats">Total seats</label>
+        <input id="seats" type="number" value={seats} onChange={e => setSeats(e.target.value)} style={{ margin: '5px', padding: '8px' }} aria-required="true" />
+
+        <label className="sr-only" htmlFor="fare">Fare per seat</label>
+        <input id="fare" type="number" placeholder="Fare per seat" value={fare} onChange={e => setFare(e.target.value)} style={{ margin: '5px', padding: '8px' }} aria-required="true" />
+
+        <label className="sr-only" htmlFor="driverPhone">Driver phone</label>
+        <input id="driverPhone" placeholder="Driver phone" value={driverPhone} onChange={e => setDriverPhone(e.target.value)} style={{ margin: '5px', padding: '8px' }} aria-required="true" />
+
         <button onClick={handleAddTrip} style={{ margin: '10px', backgroundColor: '#800000', color: 'white', padding: '8px 15px', border: 'none', borderRadius: '5px' }}>Add Trip</button>
       </div>
     </div>

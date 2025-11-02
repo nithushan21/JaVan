@@ -1,16 +1,22 @@
 import Link from 'next/link'
 
 export default function TripCard({ trip }) {
+  const imgUrl = trip.image_url || 'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=600&q=60'
   return (
-    <div className="card" style={{ border: '1px solid #ccc', padding: '15px', margin: '10px', borderRadius: '8px' }}>
-      <h3>{trip.route}</h3>
-      <p>Date: {trip.travel_date}</p>
-      <p>Time: {trip.departure_time}</p>
-      <p>Fare: {trip.fare_per_seat}</p>
-      <p>Driver Contact: {trip.driver_phone}</p>
-      <Link href={`/seat-selection?id=${trip.id}`}>
-        <button style={{ marginTop: '10px', backgroundColor: '#800000', color: 'white', padding: '8px 15px', border: 'none', borderRadius: '5px' }}>Book Seats</button>
-      </Link>
+    <div className="trip-card">
+      <div className="trip-thumb">
+        <img src={imgUrl} alt={trip.route} />
+      </div>
+      <div className="trip-body">
+        <h4 className="trip-route">{trip.route}</h4>
+        <div className="trip-meta">Date: <strong>{trip.travel_date}</strong> &nbsp; | &nbsp; Time: <strong>{trip.departure_time}</strong></div>
+        <div className="trip-meta">Fare: <strong>{trip.fare_per_seat}</strong> &nbsp; | &nbsp; Driver: <strong>{trip.driver_phone}</strong></div>
+        <div className="trip-actions">
+          <Link href={`/seat-selection?id=${trip.id}`}>
+            <button className="btn btn-primary">Select Seats</button>
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }
